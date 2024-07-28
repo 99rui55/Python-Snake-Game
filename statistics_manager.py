@@ -3,7 +3,6 @@ import graphic_utils
 from snake import Snake
 from game_settings import GameSettings
 
-
 class StatisticsManager:
     def __init__(self, g_settings: GameSettings, snake: Snake, board):
         self.g_settings = g_settings
@@ -11,10 +10,18 @@ class StatisticsManager:
         self.board = board
 
     def Update(self, g_settings, snake):
+        """update statistics values
+
+        Args:
+            g_settings (GameSettings): the game settings object
+            snake (Snake): snake
+        """
         self.g_settings = g_settings
         self.snake = snake
 
     def DrawStatistics(self):
+        """draw statistics to the screen. (score, speed)
+        """
         font = pygame.font.Font("freesansbold.ttf", 32)
         score = self.snake.s_length
         speed = self.g_settings.s_speed

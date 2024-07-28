@@ -6,6 +6,11 @@ board = None
 
 
 def DrawGrid(g_settings: GameSettings):
+    """draw the snake game grid.
+
+    Args:
+        g_settings (GameSettings): the game settings object.
+    """
     for i in range((g_settings.g_width // g_settings.blockSize) + 1):
         DrawRectangle(
             g_settings.g_color,
@@ -20,6 +25,11 @@ def DrawGrid(g_settings: GameSettings):
 
 
 def DrawBoard(g_settings: GameSettings):
+    """draw the board perimeter
+
+    Args:
+        g_settings (GameSettings): the game settings object.
+    """
     DrawRectangle(
         g_settings.b_boarder_color,
         (0, 0, g_settings.b_width, 1),
@@ -39,11 +49,24 @@ def DrawBoard(g_settings: GameSettings):
 
 
 def DrawSnake(g_settings: GameSettings, snake: Snake):
+    """draw the snake
+
+    Args:
+        g_settings (GameSettings): the game settings object.
+        snake (Snake): the snake object to draw.
+    """
+   
     for i in snake.snake:
         DrawRectangle(
             snake.color, (i[0], i[1], g_settings.blockSize, g_settings.blockSize)
         )
 
 
-def DrawRectangle(color: list, position: list):
+def DrawRectangle(color: tuple, position: tuple):
+    """draw a rectangle to the screen
+
+    Args:
+        color (list): (R, G, B)
+        position (list): (width, height, left top X, left top Y)
+    """
     pygame.draw.rect(board, color, position)

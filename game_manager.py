@@ -24,6 +24,8 @@ def Init():
 
 
 def SnakeLoop():
+    """update the snake movement
+    """
     global game_over
     current_time = pygame.time.get_ticks()
     #check if snake need to move
@@ -57,6 +59,8 @@ def SnakeLoop():
 
 
 def BoardLoop():
+    """manage the board, updating screen
+    """
     # Clear the screen at the beginning of each frame
     display.fill(game_settings.b_color)
 
@@ -95,6 +99,8 @@ def BoardLoop():
 
 
 def RestartGame():
+    """reset the game to start over
+    """
     global game_over
     game_over = False
     snake.Restart()
@@ -104,7 +110,6 @@ def RestartGame():
 def exit():
     pygame.quit()
     quit()
-
 
 def GameLoop():
     Init()
@@ -129,5 +134,3 @@ def GameLoop():
                     RestartGame()
                 elif event.key == pygame.K_e:
                     exit()
-
-
