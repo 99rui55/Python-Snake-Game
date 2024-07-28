@@ -10,11 +10,11 @@ class StatisticsManager:
         self.snake = snake
         self.board = board
 
-    def update(self, g_settings, snake):
+    def Update(self, g_settings, snake):
         self.g_settings = g_settings
         self.snake = snake
 
-    def drawStatistics(self):
+    def DrawStatistics(self):
         font = pygame.font.Font("freesansbold.ttf", 32)
         score = self.snake.s_length
         speed = self.g_settings.s_speed
@@ -30,7 +30,7 @@ class StatisticsManager:
         self.board.blit(t_score, tr_score)
         self.board.blit(t_speed, tr_speed)
 
-    def displayEndMessage(self):
+    def DisplayEndMessage(self):
         font = pygame.font.Font("freesansbold.ttf", 32)
         t_end = font.render(
             "Game Has Ended! to play again, press A. to exit, press E",

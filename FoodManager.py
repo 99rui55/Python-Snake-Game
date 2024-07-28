@@ -31,7 +31,7 @@ class FoodManager:
     def drawFood(self):
         for f in self.f_list:
             if f.vis:
-                GraphicUtils.drawRectangle(
+                GraphicUtils.DrawRectangle(
                     f.color,
                     (
                         f.position[0],
@@ -44,5 +44,5 @@ class FoodManager:
     def blinkFood(self, time):
         for f in self.f_list:
             if time - f.last_vis_change > self.g_settings.f_blink_rate:
-                f.changeVis()
+                f.ChangeVis()
                 f.last_vis_change = time

@@ -9,5 +9,5 @@ class Food:
         self.color = g_settings.f_color
         self.vis = True
 
-    def changeVis(self):
+    def ChangeVis(self):
         self.vis = not self.vis

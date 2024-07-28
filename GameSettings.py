@@ -30,7 +30,7 @@ class GameSettings:
         self.f_color = f_color
         self.s_speed = s_speed
 
-    def restart(self):
+    def Restart(self):
         self.s_speed = 8
 
 
