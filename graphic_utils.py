@@ -1,6 +1,6 @@
 import pygame
-from GameSettings import GameSettings
-from Snake import Snake
+from game_settings import GameSettings
+from snake import Snake
 
 board = None
 

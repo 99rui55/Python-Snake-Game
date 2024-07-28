@@ -1,5 +1,4 @@
-from GameSettings import GameSettings
-
+from game_settings import GameSettings
 
 class Snake:
     def __init__(self, g_settings: GameSettings, color=(255, 255, 255), initPos=(0, 0)):

@@ -1,7 +1,7 @@
 import pygame
-import GraphicUtils
-from Snake import Snake
-from GameSettings import GameSettings
+import graphic_utils
+from snake import Snake
+from game_settings import GameSettings
 
 
 class StatisticsManager:

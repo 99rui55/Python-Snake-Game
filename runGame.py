@@ -1,3 +1,0 @@
-import GameManager
-
-GameManager.GameLoop()

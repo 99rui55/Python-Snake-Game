@@ -1,7 +1,7 @@
-from GameSettings import GameSettings
-import GraphicUtils
+from game_settings import GameSettings
+import graphic_utils
 import random
-from Food import Food
+from food import Food
 
 
 class FoodManager:
@@ -31,7 +31,7 @@ class FoodManager:
     def drawFood(self):
         for f in self.f_list:
             if f.vis:
-                GraphicUtils.DrawRectangle(
+                graphic_utils.DrawRectangle(
                     f.color,
                     (
                         f.position[0],

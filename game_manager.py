@@ -1,10 +1,10 @@
 import pygame
-from GameSettings import game_settings
-from Snake import Snake
-import GraphicUtils
-import LogicUtils
-from FoodManager import FoodManager
-from StatisticsManager import StatisticsManager
+from game_settings import game_settings
+from snake import Snake
+import graphic_utils
+import logic_utils
+from food_manager import FoodManager
+from statistics_manager import StatisticsManager
 
 snake = None
 f_manager = None
@@ -18,7 +18,7 @@ def Init():
     snake = Snake(g_settings=game_settings, color=(255, 0, 174), initPos=(0, 0))
     f_manager = FoodManager(g_settings=game_settings)
     display = pygame.display.set_mode((game_settings.w_width, game_settings.w_height))
-    GraphicUtils.board = display
+    graphic_utils.board = display
     st_manger = StatisticsManager(g_settings=game_settings, snake=snake, board=display)
     game_over = False
 
@@ -35,17 +35,17 @@ def SnakeLoop():
             #determine movement direction
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    if snake.last_direction != LogicUtils.right:
-                        snake.SetDirection(LogicUtils.left)
+                    if snake.last_direction != logic_utils.right:
+                        snake.SetDirection(logic_utils.left)
                 elif event.key == pygame.K_RIGHT:
-                    if snake.last_direction != LogicUtils.left:
-                        snake.SetDirection(LogicUtils.right)
+                    if snake.last_direction != logic_utils.left:
+                        snake.SetDirection(logic_utils.right)
                 elif event.key == pygame.K_UP:
-                    if snake.last_direction != LogicUtils.down:
-                        snake.SetDirection(LogicUtils.up)
+                    if snake.last_direction != logic_utils.down:
+                        snake.SetDirection(logic_utils.up)
                 elif event.key == pygame.K_DOWN:
-                    if snake.last_direction != LogicUtils.up:
-                        snake.SetDirection(LogicUtils.down)
+                    if snake.last_direction != logic_utils.up:
+                        snake.SetDirection(logic_utils.down)
                 elif event.key == pygame.K_e:
                     exit()
         if not snake.IsDead():
@@ -61,8 +61,8 @@ def BoardLoop():
     display.fill(game_settings.b_color)
 
     # draw the grid
-    GraphicUtils.DrawGrid(g_settings=game_settings)
-    GraphicUtils.DrawBoard(g_settings=game_settings)
+    graphic_utils.DrawGrid(g_settings=game_settings)
+    graphic_utils.DrawBoard(g_settings=game_settings)
 
     # blink the food
     time = pygame.time.get_ticks()
@@ -70,7 +70,7 @@ def BoardLoop():
     f_manager.drawFood()
 
     # draw the snake
-    GraphicUtils.DrawSnake(g_settings=game_settings, snake=snake)
+    graphic_utils.DrawSnake(g_settings=game_settings, snake=snake)
 
     # draw statistics
     st_manger.Update(g_settings=game_settings, snake=snake)
@@ -115,7 +115,7 @@ def GameLoop():
 
             # preform board loop
             BoardLoop()
-            GraphicUtils.DrawBoard(game_settings)
+            graphic_utils.DrawBoard(game_settings)
 
             clock = pygame.time.Clock()
             # Limit the frame rate to 60 FPS
@@ -123,7 +123,6 @@ def GameLoop():
 
         #after player has lost, check if restart game or exit
         BoardLoop()
-        print("outside of game")
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_a:

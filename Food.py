@@ -1,4 +1,4 @@
-from GameSettings import GameSettings
+from game_settings import GameSettings
 
 
 class Food:
