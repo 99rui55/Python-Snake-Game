@@ -18,39 +18,42 @@ gameOver = False
 
 def snakeLoop():
     global gameOver
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            exit()
-
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                if snake.last_direction != LogicUtils.right:
-                    snake.setDirection(LogicUtils.left)
-            elif event.key == pygame.K_RIGHT:
-                if snake.last_direction != LogicUtils.left:
-                    snake.setDirection(LogicUtils.right)
-            elif event.key == pygame.K_UP:
-                if snake.last_direction != LogicUtils.down:
-                    snake.setDirection(LogicUtils.up)
-            elif event.key == pygame.K_DOWN:
-                if snake.last_direction != LogicUtils.up:
-                    snake.setDirection(LogicUtils.down)
-            elif event.key == pygame.K_e:
+    current_time = pygame.time.get_ticks()
+    #check if snake need to move
+    if current_time - snake.last_moved >= 1000 // game_settings.s_speed:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 exit()
-    if not snake.isDead():
-        snake.move()
-    else:
-        gameOver = True
 
-    snake.last_moved = pygame.time.get_ticks()
+            #determine movement direction
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    if snake.last_direction != LogicUtils.right:
+                        snake.setDirection(LogicUtils.left)
+                elif event.key == pygame.K_RIGHT:
+                    if snake.last_direction != LogicUtils.left:
+                        snake.setDirection(LogicUtils.right)
+                elif event.key == pygame.K_UP:
+                    if snake.last_direction != LogicUtils.down:
+                        snake.setDirection(LogicUtils.up)
+                elif event.key == pygame.K_DOWN:
+                    if snake.last_direction != LogicUtils.up:
+                        snake.setDirection(LogicUtils.down)
+                elif event.key == pygame.K_e:
+                    exit()
+        if not snake.isDead():
+            snake.move()
+        else:
+            gameOver = True
+
+        snake.last_moved = current_time
 
 
 def boardLoop():
     # Clear the screen at the beginning of each frame
     display.fill(game_settings.b_color)
 
-    # drawing the grid
+    # draw the grid
     GraphicUtils.drawGrid(g_settings=game_settings)
     GraphicUtils.drawBoard(g_settings=game_settings)
 
@@ -72,7 +75,7 @@ def boardLoop():
         f_manager.removeFood(eaten_food)
         snake.addToSnake(1)
 
-    # respawn food
+    # respawn food if needed
     if f_manager.noFood():
         f_manager.generateFood()
 
@@ -99,18 +102,18 @@ def exit():
 def gameLoop():
     while True:
         while not gameOver:
-            current_time = pygame.time.get_ticks()
             # preform snake loop by snake speed
-            if current_time - snake.last_moved >= 1000 // game_settings.s_speed:
-                snakeLoop()
+            snakeLoop()
 
             # preform board loop
             boardLoop()
             GraphicUtils.drawBoard(game_settings)
 
             clock = pygame.time.Clock()
-            clock.tick(60)  # Limit the frame rate to 60 FPS
+            # Limit the frame rate to 60 FPS
+            clock.tick(60)  
 
+        #after player has lost, check if restart game or exit
         boardLoop()
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -119,5 +122,5 @@ def gameLoop():
                 elif event.key == pygame.K_e:
                     exit()
 
-
+#call gameLoop
 gameLoop()

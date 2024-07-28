@@ -1,5 +1,5 @@
 class GameSettings:
-    # b_ for board, g_ for grid, s_ for snake
+    # w_for window, b_ for board, g_ for grid, s_ for snake
     def __init__(
         self,
         w_width,
